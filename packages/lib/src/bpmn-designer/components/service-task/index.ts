@@ -1,0 +1,11 @@
+export { default as CamelTaskConfig } from './CamelTaskConfig';
+export { default as DmnTaskConfig } from './DmnTaskConfig';
+export { default as EmailTaskConfig } from './EmailTaskConfig';
+export { default as ExternalWorkerTaskConfig } from './ExternalWorkerTaskConfig';
+export { default as HttpTaskConfig } from './HttpTaskConfig';
+export { default as MuleTaskConfig } from './MuleTaskConfig';
+export { default as ServiceTaskBasic } from './ServiceTaskBasic';
+export { default as ServiceTaskExecution } from './ServiceTaskExecution';
+export { default as ServiceTaskFields } from './ServiceTaskFields';
+export { default as ShellTaskConfig } from './ShellTaskConfig';
+export { default as TaskTypeConfig } from './TaskTypeConfig';

@@ -1,0 +1,52 @@
+{
+  "name": "Design",
+  "uri": "http://flowable.org/design",
+  "prefix": "design",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "StencilId",
+      "superClass": ["Element"],
+      "meta": {
+        "allowedIn": ["*"]
+      },
+      "properties": [
+        {
+          "name": "value",
+          "type": "String",
+          "isBody": true
+        }
+      ]
+    },
+    {
+      "name": "waitforcompletion",
+      "superClass": ["Element"],
+      "meta": {
+        "allowedIn": ["*"]
+      },
+      "properties": [
+        {
+          "name": "value",
+          "type": "Boolean",
+          "isBody": true
+        }
+      ]
+    },
+    {
+      "name": "activityref",
+      "superClass": ["Element"],
+      "meta": {
+        "allowedIn": ["*"]
+      },
+      "properties": [
+        {
+          "name": "value",
+          "type": "String",
+          "isBody": true
+        }
+      ]
+    }
+  ]
+}

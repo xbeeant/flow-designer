@@ -1,0 +1,21 @@
+{
+  "name": "@xbeeant/flow-designer-monorepo",
+  "version": "1.0.0",
+  "description": "flow designer monorepo with lerna",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "lerna run build",
+    "dev": "lerna run dev",
+    "clean": "lerna clean",
+    "format": "bunx --bun @biomejs/biome format --write"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.3",
+    "lerna": "^8.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}

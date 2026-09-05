@@ -1,0 +1,1129 @@
+{
+  "name": "Flowable",
+  "uri": "http://flowable.org/bpmn",
+  "prefix": "flowable",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "Definitions",
+      "isAbstract": true,
+      "extends": ["bpmn:Definitions"],
+      "properties": [
+        {
+          "name": "diagramRelationId",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "InOutBinding",
+      "superClass": ["Element"],
+      "isAbstract": true,
+      "properties": [
+        {
+          "name": "source",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "sourceExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "target",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "businessKey",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "local",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": false
+        },
+        {
+          "name": "variables",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "In",
+      "superClass": ["InOutBinding"],
+      "meta": {
+        "allowedIn": ["bpmn:CallActivity", "bpmn:SignalEventDefinition"]
+      }
+    },
+
+    {
+      "name": "Out",
+      "superClass": ["InOutBinding"],
+      "meta": {
+        "allowedIn": ["bpmn:CallActivity"]
+      }
+    },
+    {
+      "name": "AsyncCapable",
+      "isAbstract": true,
+      "extends": ["bpmn:Activity", "bpmn:Gateway", "bpmn:Event"],
+      "properties": [
+        {
+          "name": "async",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": false
+        },
+        {
+          "name": "asyncBefore",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": false
+        },
+        {
+          "name": "asyncAfter",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": false
+        },
+        {
+          "name": "exclusive",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "Scope",
+      "extends": ["bpmn:Signal"],
+      "properties": [
+        {
+          "name": "scope",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "ErrorEventDefinitionExtension",
+      "isAbstract": true,
+      "extends": ["bpmn:ErrorEventDefinition"],
+      "properties": [
+        {
+          "name": "errorCodeVariable",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "errorMessageVariable",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "errorVariableLocalScope",
+          "isAttr": true,
+          "type": "Boolean"
+        },
+        {
+          "name": "errorVariableTransient",
+          "isAttr": true,
+          "type": "Boolean"
+        }
+      ]
+    },
+    {
+      "name": "ErrorEventDefinition",
+      "superClass": ["bpmn:ErrorEventDefinition", "Element"],
+      "properties": [
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "String"
+        }
+      ],
+      "meta": {
+        "allowedIn": ["bpmn:ServiceTask"]
+      }
+    },
+    {
+      "name": "SignalEventDefinition",
+      "superClass": ["bpmn:SignalEventDefinition", "Element"],
+      "properties": [
+        {
+          "name": "signalExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "async",
+          "isAttr": true,
+          "type": "Boolean"
+        }
+      ]
+    },
+
+    {
+      "name": "MessageEventDefinition",
+      "superClass": ["bpmn:MessageEventDefinition", "Element"],
+      "properties": [
+        {
+          "name": "messageExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "async",
+          "isAttr": true,
+          "type": "Boolean"
+        }
+      ]
+    },
+    {
+      "name": "FlowableServiceTask",
+      "superClass": ["Element"],
+      "isAbstract": true,
+      "extends": ["bpmn:ServiceTask"],
+      "properties": [
+        {
+          "name": "type",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "ExecutionListener",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "event",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "class",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "delegateExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "fields",
+          "type": "Field",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "TaskListener",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "event",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "class",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "delegateExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "eventDefinitions",
+          "type": "EventDefinition",
+          "isMany": true
+        },
+        {
+          "name": "fields",
+          "type": "Field",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "Field",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expression",
+          "type": "String"
+        },
+        {
+          "name": "stringValue",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "string",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "FormProperty",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "type",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "required",
+          "isAttr": true,
+          "type": "Boolean"
+        },
+        {
+          "name": "readable",
+          "isAttr": true,
+          "type": "Boolean"
+        },
+        {
+          "name": "writable",
+          "isAttr": true,
+          "type": "Boolean"
+        },
+        {
+          "name": "variable",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "datePattern",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "values",
+          "type": "Value",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "FormData",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "fields",
+          "type": "FormField",
+          "isMany": true
+        },
+        {
+          "name": "businessKey",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "FormField",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "label",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "type",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "datePattern",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "defaultValue",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Properties"
+        },
+        {
+          "name": "validation",
+          "type": "Validation"
+        },
+        {
+          "name": "values",
+          "type": "Value",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "Value",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "text",
+          "type": "String",
+          "isBody": true
+        }
+      ]
+    },
+    {
+      "name": "Properties",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "values",
+          "type": "Property",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "Validation",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "constraints",
+          "type": "Constraint",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "Constraint",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "config",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Property",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "EventDefinition",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "eventType",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "InOut",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "businessKey",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "source",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "sourceExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "target",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "variables",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "EventListener",
+      "superClass": ["Element"],
+      "meta": {
+        "allowedIn": ["bpmn:Process"]
+      },
+      "properties": [
+        {
+          "name": "class",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "delegateExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "entityType",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "errorCode",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "events",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "fields",
+          "type": "Field",
+          "isMany": true
+        },
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "messageName",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "signalName",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "throwEvent",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "DataObject",
+      "superClass": ["bpmn:DataObject"],
+      "meta": {
+        "allowedIn": ["bpmn:Process", "bpmn:SubProcess"]
+      },
+      "properties": [
+        {
+          "name": "itemSubjectRef",
+          "type": "String",
+          "isAttr": true,
+          "redefines": "bpmn:DataObject#itemSubjectRef"
+        }
+      ]
+    },
+    {
+      "name": "Error",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "errorCode",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Signal",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "scope",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Escalation",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "escalationCode",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "DataStoreReference",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "dataStoreRef",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Artifact",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "HistoryLevel",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "historyLevel",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "FailedJobRetryTimeCycle",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "body",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "VariableListenerEventDefinition",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "variableName",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "variableChangeType",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "class",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "delegateExpression",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "fields",
+          "type": "Field",
+          "isMany": true
+        }
+      ]
+    },
+    {
+      "name": "Http",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "method", "type": "String", "isAttr": true },
+        { "name": "url", "type": "String", "isAttr": true },
+        { "name": "headers", "type": "String" },
+        { "name": "body", "type": "String" }
+      ]
+    },
+    {
+      "name": "Email",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "to", "type": "String", "isAttr": true },
+        { "name": "from", "type": "String", "isAttr": true },
+        { "name": "subject", "type": "String", "isAttr": true },
+        { "name": "text", "type": "String" },
+        { "name": "html", "type": "String" }
+      ]
+    },
+    {
+      "name": "Shell",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "command", "type": "String", "isAttr": true },
+        { "name": "arguments", "type": "String" },
+        { "name": "directory", "type": "String", "isAttr": true }
+      ]
+    },
+    {
+      "name": "ExternalWorker",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "topic", "type": "String", "isAttr": true },
+        { "name": "lockDuration", "type": "String", "isAttr": true },
+        { "name": "retries", "type": "String", "isAttr": true }
+      ]
+    },
+    {
+      "name": "Camel",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "uri", "type": "String", "isAttr": true },
+        { "name": "body", "type": "String" }
+      ]
+    },
+    {
+      "name": "Dmn",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "decisionRef", "type": "String", "isAttr": true },
+        { "name": "decisionRefBinding", "type": "String", "isAttr": true },
+        { "name": "mapDecisionResult", "type": "String", "isAttr": true }
+      ]
+    },
+    {
+      "name": "Mule",
+      "superClass": ["Element"],
+      "properties": [
+        { "name": "configUrl", "type": "String", "isAttr": true },
+        { "name": "flow", "type": "String", "isAttr": true },
+        { "name": "inputParameters", "type": "String" }
+      ]
+    }
+  ],
+  "emumerations": [],
+  "extensions": {
+    "bpmn:Process": {
+      "properties": [
+        { "name": "candidateStarterGroups", "type": "String", "isAttr": true },
+        { "name": "candidateStarterUsers", "type": "String", "isAttr": true },
+        { "name": "versionTag", "type": "String", "isAttr": true },
+        { "name": "historyTimeToLive", "type": "String", "isAttr": true },
+        { "name": "isStartableInTasklist", "type": "Boolean", "isAttr": true }
+      ],
+      "children": {
+        "historyLevel": { "type": "HistoryLevel" }
+      }
+    },
+    "bpmn:ExtensionElements": {
+      "children": {
+        "executionListeners": { "type": "ExecutionListener", "isMany": true },
+        "eventListeners": { "type": "EventListener", "isMany": true },
+        "dataObjects": { "type": "DataObject", "isMany": true },
+        "dataStoreReferences": { "type": "DataStoreReference", "isMany": true },
+        "messages": { "type": "Message", "isMany": true },
+        "errors": { "type": "Error", "isMany": true },
+        "signals": { "type": "Signal", "isMany": true },
+        "escalations": { "type": "Escalation", "isMany": true },
+        "properties": { "type": "Properties", "isMany": true },
+        "taskListeners": { "type": "TaskListener", "isMany": true },
+        "fields": { "type": "Field", "isMany": true },
+        "in": { "type": "InOut", "isMany": true },
+        "out": { "type": "InOut", "isMany": true },
+        "failedJobRetryTimeCycle": { "type": "FailedJobRetryTimeCycle" },
+        "variableListenerEventDefinitions": {
+          "type": "VariableListenerEventDefinition",
+          "isMany": true
+        },
+        "http": { "type": "Http" },
+        "email": { "type": "Email" },
+        "shell": { "type": "Shell" },
+        "externalWorker": { "type": "ExternalWorker" },
+        "camel": { "type": "Camel" },
+        "dmn": { "type": "Dmn" },
+        "mule": { "type": "Mule" }
+      }
+    },
+    "bpmn:StartEvent": {
+      "properties": [
+        { "name": "formKey", "type": "String", "isAttr": true },
+        { "name": "initiator", "type": "String", "isAttr": true },
+        { "name": "formHandlerClass", "type": "String", "isAttr": true },
+        { "name": "formFields", "type": "String", "isAttr": true },
+        { "name": "formFieldValidation", "type": "Boolean", "isAttr": true },
+        { "name": "formFieldConfig", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:EndEvent": {
+      "properties": [
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:IntermediateCatchEvent": {
+      "properties": [
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:IntermediateThrowEvent": {
+      "properties": [
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:BoundaryEvent": {
+      "properties": [
+        { "name": "cancelActivity", "type": "Boolean", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:UserTask": {
+      "properties": [
+        { "name": "assignee", "type": "String", "isAttr": true },
+        { "name": "candidateUsers", "type": "String", "isAttr": true },
+        { "name": "candidateGroups", "type": "String", "isAttr": true },
+        { "name": "dueDate", "type": "String", "isAttr": true },
+        { "name": "formKey", "type": "String", "isAttr": true },
+        { "name": "formHandlerClass", "type": "String", "isAttr": true },
+        { "name": "formFields", "type": "String", "isAttr": true },
+        { "name": "formFieldValidation", "type": "Boolean", "isAttr": true },
+        { "name": "formFieldConfig", "type": "String", "isAttr": true },
+        { "name": "priority", "type": "String", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:ServiceTask": {
+      "properties": [
+        { "name": "class", "type": "String", "isAttr": true },
+        { "name": "expression", "type": "String", "isAttr": true },
+        { "name": "delegateExpression", "type": "String", "isAttr": true },
+        { "name": "resultVariableName", "type": "String", "isAttr": true },
+        { "name": "type", "type": "String", "isAttr": true },
+        { "name": "triggerable", "type": "Boolean", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:ScriptTask": {
+      "properties": [
+        { "name": "resultVariable", "type": "String", "isAttr": true },
+        { "name": "autoStoreVariables", "type": "Boolean", "isAttr": true },
+        { "name": "scriptFormat", "type": "String", "isAttr": true },
+        { "name": "resource", "type": "String", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:BusinessRuleTask": {
+      "properties": [
+        { "name": "decisionRef", "type": "String", "isAttr": true },
+        { "name": "decisionRefBinding", "type": "String", "isAttr": true },
+        { "name": "decisionRefVersion", "type": "String", "isAttr": true },
+        { "name": "mapDecisionResult", "type": "String", "isAttr": true },
+        { "name": "decisionRefTenantId", "type": "String", "isAttr": true },
+        { "name": "class", "type": "String", "isAttr": true },
+        { "name": "expression", "type": "String", "isAttr": true },
+        { "name": "delegateExpression", "type": "String", "isAttr": true },
+        { "name": "resultVariableName", "type": "String", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:CallActivity": {
+      "properties": [
+        { "name": "calledElementType", "type": "String", "isAttr": true },
+        { "name": "inheritVariables", "type": "Boolean", "isAttr": true },
+        { "name": "inheritBusinessKey", "type": "Boolean", "isAttr": true },
+        { "name": "sameDeployment", "type": "Boolean", "isAttr": true },
+        { "name": "processInstanceName", "type": "String", "isAttr": true },
+        { "name": "idVariableName", "type": "String", "isAttr": true },
+        { "name": "businessKey", "type": "String", "isAttr": true },
+        {
+          "name": "useLocalScopeForOutParameters",
+          "type": "Boolean",
+          "isAttr": true
+        },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:SendTask": {
+      "properties": [
+        { "name": "class", "type": "String", "isAttr": true },
+        { "name": "expression", "type": "String", "isAttr": true },
+        { "name": "delegateExpression", "type": "String", "isAttr": true },
+        { "name": "resultVariableName", "type": "String", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:ReceiveTask": {
+      "properties": [
+        { "name": "waitForMessage", "type": "Boolean", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:ManualTask": {
+      "properties": [
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:ExclusiveGateway": {
+      "properties": [
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:ParallelGateway": {
+      "properties": [
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:InclusiveGateway": {
+      "properties": [
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:EventBasedGateway": {
+      "properties": [
+        { "name": "instantiate", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:SubProcess": {
+      "properties": [
+        { "name": "triggeredByEvent", "type": "Boolean", "isAttr": true },
+        { "name": "skipExpression", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:AdHocSubProcess": {
+      "properties": [
+        {
+          "name": "cancelRemainingInstances",
+          "type": "Boolean",
+          "isAttr": true
+        },
+        { "name": "ordering", "type": "String", "isAttr": true },
+        { "name": "async", "type": "Boolean", "isAttr": true },
+        { "name": "asyncBefore", "type": "Boolean", "isAttr": true },
+        { "name": "asyncAfter", "type": "Boolean", "isAttr": true },
+        { "name": "exclusive", "type": "Boolean", "isAttr": true }
+      ]
+    },
+    "bpmn:DataObject": {
+      "properties": [
+        { "name": "itemSubjectRef", "type": "String", "isAttr": true }
+      ]
+    },
+    "bpmn:SequenceFlow": {
+      "properties": [
+        { "name": "skipExpression", "type": "String", "isAttr": true }
+      ]
+    },
+    "bpmn:MultiInstanceLoopCharacteristics": {
+      "properties": [
+        { "name": "collection", "type": "String", "isAttr": true },
+        { "name": "elementVariable", "type": "String", "isAttr": true },
+        { "name": "noWaitStatesAsyncLeave", "type": "Boolean", "isAttr": true }
+      ]
+    }
+  }
+}

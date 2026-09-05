@@ -1,0 +1,50 @@
+{
+  "name": "@xbeeant/flow-designer",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build:tsc": "tsc -b && vite build",
+    "build:cjs": "tsc -p ./tsconfig.app.json && vite build -f cjs",
+    "build:amd": "tsc -p ./tsconfig.app.json && vite build -f amd",
+    "build:umd": "tsc -p ./tsconfig.app.json && vite build -f umd",
+    "build:es": "tsc -p ./tsconfig.app.json && vite build -f es",
+    "build:nes": "vite build -f es",
+    "build": "npm run build:nes"
+  },
+  "dependencies": {
+    "@ant-design/pro-components": "^2.8.10",
+    "@bpmn-io/properties-panel": "^3.47.0",
+    "bpmn-js": "^18.21.0",
+    "bpmn-js-i18n-zh": "^1.3.0",
+    "bpmn-js-properties-panel": "^5.61.0",
+    "bpmn-js-token-simulation": "^0.40.0",
+    "bpmn-moddle": "^10.0.0",
+    "diagram-js": "^15.22.0",
+    "diagram-js-grid": "^2.0.1",
+    "diagram-js-grid-bg": "^1.1.0",
+    "eventemitter3": "^5.0.4",
+    "lodash-es": "^4.18.1",
+    "lucide-react": "^1.24.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "peerDependencies": {
+    "antd": "^6.5.1"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1",
+    "vite-plugin-dts": "^5.0.3",
+    "vite-plugin-lib-inject-css": "^2.2.2"
+  }
+}
