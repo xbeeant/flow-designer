@@ -52,6 +52,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Build lib
+        working-directory: packages/lib
+        # 先构建库，生成 dist/es/index.css 等产物（examples 通过
+        # '@xbeeant/flow-designer/dist/es/index.css' 直接引用构建产物）
+        run: bunx --bun vite build -f es
+
       - name: Build examples
         working-directory: packages/examples
         # 直接执行 vite build（tsc -b 存在上游源包的类型报错，不影响产物）
