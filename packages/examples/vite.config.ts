@@ -4,9 +4,11 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 const cookie = 'token=ZDczOTBiYjgtZWRkZC00NWNmLWI3YWMtOTUwODkwMGE3NmQy';
+const base = process.env.NEXUS_BASE || '/flow-designer/';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base,
   resolve: {
     alias: {
       '@xbeeant/flow-designer': path.resolve(__dirname, '../lib'),
