@@ -16,15 +16,15 @@ name: Deploy GitHub Pages
 
 on:
   workflow_dispatch:
-    # 可选：手动触发时选择分支（默认为 master）
+    # 可选：手动触发时选择分支（默认为 main）
     inputs:
       ref:
-        description: '分支名（默认 master）'
+        description: '分支名（默认 main）'
         required: false
-        default: 'master'
+        default: 'main'
   push:
     branches:
-      - master
+      - main
 
 permissions:
   contents: read

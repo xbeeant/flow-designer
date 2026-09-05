@@ -20,9 +20,9 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: '分支名（默认 master）'
+        description: '分支名（默认 main）'
         required: false
-        default: 'master'
+        default: 'main'
   push:
     tags:
       - 'v*'
